@@ -1,0 +1,58 @@
+<table
+  mat-table
+  [dataSource]="dataSource"
+  matSort
+  (matSortChange)="changeSort($event)"
+  class="mat-elevation-z8"
+>
+  <!--
+    ------------- MULTI SELECT ---------------------
+   -->
+  <ng-container *ngIf="multiSelect" matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox
+        (change)="$event ? masterToggle() : null"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()"
+        [aria-label]="checkboxLabel()"
+      >
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="$event ? selectRow(row) : null"
+        [checked]="selection.isSelected(row)"
+        [aria-label]="checkboxLabel(row)"
+      >
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+  <!--
+    ---------------------- COLUMNS ----------------------
+   -->
+
+  <ng-container
+    [matColumnDef]="column.displayName"
+    *ngFor="let column of displayedColumns"
+  >
+    <div *ngIf="column.sort; else elseBlock">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="{{ column.name }}">
+        {{ column.displayName }}
+      </th>
+    </div>
+    <ng-template #elseBlock>
+      <th mat-header-cell *matHeaderCellDef>{{ column.displayName }}</th>
+    </ng-template>
+    <td mat-cell *matCellDef="let element">{{ element[column.name] }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: columnsToDisplay"
+    class="example-element-row"
+    (click)="selectRow(row)"
+  ></tr>
+</table>

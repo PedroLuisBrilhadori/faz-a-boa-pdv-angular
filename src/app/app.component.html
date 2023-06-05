@@ -1,33 +1,4 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>Custom Toolbar</span>
-  </mat-toolbar-row>
-
-  <mat-toolbar-row class="flex justify-between">
-    <span>Second Line</span>
-    <mat-icon
-      class="example-icon"
-      aria-hidden="false"
-      aria-label="Example user verified icon"
-      >verified_user</mat-icon
-    >
-  </mat-toolbar-row>
-
-  <mat-toolbar-row class="flex justify-between">
-    <span>Third Line</span>
-    <div class="flex justify-between gap-4">
-      <mat-icon
-        class="example-icon"
-        aria-hidden="false"
-        aria-label="Example heart icon"
-        >favorite</mat-icon
-      >
-      <mat-icon
-        class="example-icon"
-        aria-hidden="false"
-        aria-label="Example delete icon"
-        >delete</mat-icon
-      >
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
+<pdv-table
+  [displayedColumns]="displayedColumns"
+  [dataSource]="dataSource"
+></pdv-table>
